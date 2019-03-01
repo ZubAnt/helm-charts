@@ -33,13 +33,13 @@ apt-mark hold kubelet kubeadm kubectl
 
 # Configuration
 
-##### Initialize new cluster for example.com:
+#### Initialize new cluster for example.com:
 
 ```bash
 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-cert-extra-sans=example.com
 ```
 
-##### Copy config:
+#### Copy config:
 
 ```bash
 rm -rf $HOME/.kube
@@ -48,7 +48,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-##### Apply pod network:
+#### Apply pod network:
 [rbac-kdd.yaml](./rbac-kdd.yaml)
 
 [calico.yaml](./calico.yaml)
@@ -58,7 +58,7 @@ kubectl apply -f rbac-kdd.yaml
 kubectl apply -f calico.yaml
 ```
 
-##### Enable taint node
+#### Enable taint node
 If we have only one node
 ```bash
 kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -66,7 +66,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 # Gitlab integration
 
-##### Allow gitlab access
+#### Allow gitlab access
 [gitlab-service-account.yaml](./gitlab-service-account.yaml)
 
 [gitlab-cluster-role.yaml](./gitlab-cluster-role.yaml)
@@ -75,7 +75,7 @@ kubectl create -f gitlab-service-account.yaml
 kubectl create -f gitlab-cluster-role.yaml
 ```
 
-##### Get token and certificate
+#### Get token and certificate
 ```bash
 kubectl get secrets
 ```
@@ -90,7 +90,7 @@ kubectl get secret <secret name> -o jsonpath="{['data']['ca\.crt']}" |
 base64 --decode
 ```
 
-##### Install baremetal LB
+#### Install baremetal LB
 
 `Attention!!!`
 
@@ -104,5 +104,5 @@ kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.7.3/manifes
 kubectl apply -f configmap.yaml
 ```
 
-##### Install helm
-##### Install ingress
+#### Install helm
+#### Install ingress
