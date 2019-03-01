@@ -49,6 +49,10 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 ##### Apply pod network:
+[rbac-kdd.yaml](./rbac-kdd.yaml)
+
+[calico.yaml](./calico.yaml)
+
 ```bash
 kubectl apply -f rbac-kdd.yaml
 kubectl apply -f calico.yaml
@@ -63,6 +67,9 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 # Gitlab integration
 
 ##### Allow gitlab access
+[gitlab-service-account.yaml](./gitlab-service-account.yaml)
+
+[gitlab-cluster-role.yaml](./gitlab-cluster-role.yaml)
 ```bash
 kubectl create -f gitlab-service-account.yaml
 kubectl create -f gitlab-cluster-role.yaml
@@ -82,3 +89,20 @@ base64 --decode
 kubectl get secret <secret name> -o jsonpath="{['data']['ca\.crt']}" |
 base64 --decode
 ```
+
+##### Install baremetal LB
+
+`Attention!!!`
+
+In this [configmap.yaml](./configmap.yaml) set your own inner IPv4 
+
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.7.3/manifests/metallb.yaml
+```
+```bash
+kubectl apply -f configmap.yaml
+```
+
+##### Install helm
+##### Install ingress
