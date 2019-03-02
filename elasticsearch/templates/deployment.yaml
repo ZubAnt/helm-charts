@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:2
+        ports:
+        - containerPort: 9200
+        envFrom:
+        - configMapRef:
+            name: environment
+        volumeMounts:
+        - name: config-volume
+          mountPath: /usr/share/elasticsearch/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: elasticsearch.yml
+
