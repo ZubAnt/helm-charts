@@ -1,0 +1,15 @@
+# An Ingress with 2 hosts and 3 endpoints
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: elasticsearch-ingress
+spec:
+  rules:
+  - host: elasticsearch.tic-dev.xyz
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: elasticsearch-service
+            servicePort: 9200
+
