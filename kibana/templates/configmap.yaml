@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kibana-environment
+data:
+  SERVER_HOST: "0.0.0.0"
+  SERVER_NAME: "kibana.tic-dev.xyz"
+  ELASTICSEARCH_URL: "http://elasticsearch-service:9200"
+  XPACK_SECURITY_ENABLED: "false"
+
