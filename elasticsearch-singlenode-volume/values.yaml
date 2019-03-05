@@ -1,0 +1,19 @@
+node: new-space-qa
+
+volume:
+  metadata:
+    name: elasticsearch-singlenode-pv
+  spec:
+    storageClassName: elasticsearch-singlenode-storageclass
+    capacity:
+      storage: 10Gi
+    local:
+      path: '/mnt/elasticsearch-singlenode-volume'
+
+volumeClaim:
+  metadata:
+    name: elasticsearch-singlenode-pvc
+  spec:
+    resources:
+      requests:
+        storage: 10Gi
