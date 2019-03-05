@@ -104,5 +104,46 @@ kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.7.3/manifes
 kubectl apply -f configmap.yaml
 ```
 
-#### Install helm
+#### Install helm tiller
 #### Install ingress
+
+# Setup Helm
+
+#### Download and install
+
+[releases](https://github.com/kubernetes/helm/releases)
+
+```bash
+HELM_VERSION=v2.12.3 wget -q https://storage.googleapis.com/kubernetes-helm/helm-$HELM_VERSION-linux-amd64.tar.gz \
+&& tar -xvf helm-$HELM_VERSION-linux-amd64.tar.gz \
+&& sudo mkdir -p /opt/helm/ \
+&& sudo cp -a linux-amd64/. /opt/helm/ \
+&& sudo chmod a+x /opt/helm/helm \
+&& sudo chmod a+x /opt/helm/tiller \
+&& rm -rf helm-$HELM_VERSION-linux-amd64.tar.gz linux-amd64 \
+&& export PATH=$PATH:/opt/helm
+```
+
+#### Configure
+
+[rbac-tiller.yaml](./rbac-tiller.yaml)
+
+```bash
+kubectl apply -f rbac-tiller.yaml
+```
+
+#### Init
+```bash
+helm init --service-account tiller
+```
+
+#### Check
+```bash
+kubectl get deployments -n kube-system | grep tiller
+```
+
+Output must be:
+```
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE
+tiller-deploy   1/1     1            1           90s
+```

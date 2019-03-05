@@ -1,0 +1,3 @@
+persistance:
+  enabled: false
+  volumeClaim: elasticsearch-pvc

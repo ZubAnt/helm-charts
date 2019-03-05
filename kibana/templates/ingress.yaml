@@ -1,0 +1,15 @@
+# An Ingress with 2 hosts and 3 endpoints
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kibana-ingress
+spec:
+  rules:
+  - host: kibana.tic-dev.xyz
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: kibana-service
+            servicePort: 5601
+
