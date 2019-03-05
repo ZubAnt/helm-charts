@@ -1,0 +1,19 @@
+node: new-space-qa
+
+volume:
+  metadata:
+    name: prometheus-server-pv
+  spec:
+    storageClassName: prometheus-server-storageclass
+    capacity:
+      storage: 8Gi
+    local:
+      path: '/mnt/prometheus-server-volume'
+
+volumeClaim:
+  metadata:
+    name: prometheus-server-pvc
+  spec:
+    resources:
+      requests:
+        storage: 8Gi

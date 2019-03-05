@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Volume for prometheus
+name: prometheus-volume
+version: 0.0.1
