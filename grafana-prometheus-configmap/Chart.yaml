@@ -1,0 +1,4 @@
+apiVersion: v1
+description: grafana-prometheus-configmap
+name: grafana-prometheus-configmap
+version: 0.0.1
